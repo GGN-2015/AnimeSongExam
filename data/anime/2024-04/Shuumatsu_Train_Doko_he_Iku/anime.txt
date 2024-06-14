@@ -1,0 +1,4 @@
+name;末日列车去哪里？(終末トレインどこへいく？)
+quarter;2024-04
+op1.mp3;GA-TAN GO-TON
+ed1.mp3;Eureka(ユリイカ)

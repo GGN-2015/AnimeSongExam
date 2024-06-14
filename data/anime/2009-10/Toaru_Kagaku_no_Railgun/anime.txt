@@ -1,0 +1,6 @@
+name;某科学的超电磁炮
+quarter;2009-10
+op1.mp3;only my railgun
+op2.mp3;LEVEL5 judgelight
+ed1.mp3;Dear My Friend まだ見ぬ未来へ
+ed2.mp3;Real Force
