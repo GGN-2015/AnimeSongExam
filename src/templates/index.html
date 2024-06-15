@@ -32,6 +32,10 @@
                                             <label for="form_year_to" class="form-label">作品年份不晚于</label>
                                             <input type="text" class="form-control" value="{{year_to}}"  id="form_year_to" name="year_to" placeholder="">
                                         </div>
+                                        <div class="mb-3 row">
+                                            <label for="form_question_cnt" class="form-label">选项数量</label>
+                                            <input type="text" class="form-control" value="{{question_cnt}}"  id="form_question_cnt" name="question_cnt" placeholder="">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="mb-3 col">
@@ -80,7 +84,7 @@
                 </audio>
                 <ul class="list-group">
                     {% for option in options %}
-                        <li class="list-group-item list-group-item-action one-of-the-options" data-file="{{ option.file }}" onclick="check_answer('{{ option.file }}')">{{ option.tag }}</li>
+                        <li class="list-group-item list-group-item-action one-of-the-options" data-file="{{ option.file }}" onclick="check_answer('{{ option.file }}')">{{ option.tag|safe }}</li>
                     {% endfor %}
                     <li class="list-group-item">
                         <button id="refresh_button" type="button" class="btn btn-primary" onclick="location.reload();">换一题</button>
@@ -159,7 +163,7 @@
                 if(myanswer == answer_file) {
                     send_message("回答正确");
                 }else {
-                    send_message("回答错误<br>正确答案：{{ answer.tag }}");
+                    send_message("回答错误<br>正确答案：{{ answer.tag|safe }}");
                     recolor_wrong_answer(myanswer); // 标记错误答案
                 }
                 rename_refresh_button();

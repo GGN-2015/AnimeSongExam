@@ -29,12 +29,13 @@ def index():
     movie_checkbox = request.args.get("movie_checkbox", "0")
     jpn_vocaloid   = request.args.get("jpn_vocaloid_checkbox", "0")
     chn_vocaloid   = request.args.get("chn_vocaloid_checkbox", "0")
+    question_cnt   = max(2, min(wrap_int(request.args.get("question_cnt", ""), 4), 10))
     if set([anime_checkbox, movie_checkbox, jpn_vocaloid, chn_vocaloid]) == set(["0"]):
         anime_checkbox = "1"
         movie_checkbox = "1"
         jpn_vocaloid   = "1"
         chn_vocaloid   = "1" # 默认全选
-    options = answers.generate_random_question(4, year_from, year_to, anime_checkbox=="1", movie_checkbox=="1", jpn_vocaloid=="1", chn_vocaloid=="1")
+    options = answers.generate_random_question(question_cnt, year_from, year_to, anime_checkbox=="1", movie_checkbox=="1", jpn_vocaloid=="1", chn_vocaloid=="1")
     if options != []:
         answer = options[0] # 默认第一个选项是答案
     else:
@@ -43,6 +44,7 @@ def index():
     return render_template('index.html', 
         options=options, 
         answer=answer,
+        question_cnt=question_cnt,
         year_from=year_from,
         year_to=year_to,
         anime_checkbox=anime_checkbox,

@@ -4,6 +4,13 @@ import random
 from DirUtils  import DirUtils
 from TxtParser import TxtParser
 
+# 在 bootstrap 里打一个 badge
+def green_badge(s: str) -> str:
+    if s.strip() == "":
+        return ""
+    return "<span class=\'badge text-bg-success\'>%s</span>" % s
+    #return s
+
 # 获取所有可能成为问题答案的项目
 class Answers:
     def __init__(self, dir_utils: DirUtils, txt_parser:TxtParser):
@@ -25,7 +32,7 @@ class Answers:
                 for term in dic:     
                     song_name = dic[term]
                     if term.endswith(".mp3"):
-                        tag  = anime_name + " " + term[:-4] + " " + song_name
+                        tag  = anime_name + " " + green_badge(term[:-4]) + " " + song_name
                         file = os.path.join(dirnow, term)
                         assert os.path.isfile(file)
                         final_file = os.path.relpath(file, self.dir_utils.get_data_dir()).replace("\\", "/")
