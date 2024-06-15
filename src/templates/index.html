@@ -10,18 +10,87 @@
     <div class="container-md">
         <h1>基于听歌识曲的二次元浓度测试</h1>
         <hr>
-        <h2>设置</h2>
+        <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    设置
+                </button>
+              </h2>
+              <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <div class="mb-3">
+                        <form action="" method="GET">
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <div class="mb-3 col">
+                                        <div class="mb-3 row">
+                                            <label for="form_year_from" class="form-label">作品年份不早于</label>
+                                            <input type="text" class="form-control" value="{{year_from}}" id="form_year_from" name="year_from" placeholder="">
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label for="form_year_to" class="form-label">作品年份不晚于</label>
+                                            <input type="text" class="form-control" value="{{year_to}}"  id="form_year_to" name="year_to" placeholder="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="anime_checkbox" class="form-label">音乐来源</label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-text">
+                                            <input class="form-check-input mt-0" name="anime_checkbox" id="anime_checkbox" type="checkbox" value="1" aria-label="Checkbox for following text input" {{ "checked" if anime_checkbox == "1" else "" }}>
+                                        </div>
+                                        <input type="text" readonly class="form-control" value="动画" aria-label="Text input with checkbox">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-text">
+                                            <input class="form-check-input mt-0" name="movie_checkbox" type="checkbox" value="1" aria-label="Checkbox for following text input" {{ "checked" if movie_checkbox == "1" else "" }}>
+                                        </div>
+                                        <input type="text" readonly class="form-control" value="电影" aria-label="Text input with checkbox">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-text">
+                                            <input class="form-check-input mt-0" name="jpn_vocaloid_checkbox" type="checkbox" value="1" aria-label="Checkbox for following text input" {{ "checked" if jpn_vocaloid_checkbox == "1" else "" }}>
+                                        </div>
+                                        <input type="text" readonly class="form-control" value="日文 V 家" aria-label="Text input with checkbox">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-text">
+                                            <input class="form-check-input mt-0" name="chn_vocaloid_checkbox" type="checkbox" value="1" aria-label="Checkbox for following text input" {{ "checked" if chn_vocaloid_checkbox == "1" else "" }}>
+                                        </div>
+                                        <input type="text" readonly class="form-control" value="中文 V 家" aria-label="Text input with checkbox">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <button type="submit" class="btn btn-primary mb-3">应用</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+              </div>
+            </div>
+        </div>
         <hr>
-        <h2>问答</h2>
-            <audio controls>
-                <source src="/audio/{{ answer.file }}" type="audio/mpeg">
-                您的浏览器不支持 audio 模块
-            </audio>
-            <ul class="list-group">
-                {% for option in options %}
-                    <li class="list-group-item list-group-item-action one-of-the-options" data-file="{{ option.file }}" onclick="check_answer('{{ option.file }}')">{{ option.tag }}</li>
-                {% endfor %}
-            </ul>
+            {% if (options|length) != 0%}
+                <h2>请听歌识曲</h2>
+                <audio controls>
+                    <source src="/audio/{{ answer.file }}" type="audio/mpeg">
+                    您的浏览器不支持 audio 模块
+                </audio>
+                <ul class="list-group">
+                    {% for option in options %}
+                        <li class="list-group-item list-group-item-action one-of-the-options" data-file="{{ option.file }}" onclick="check_answer('{{ option.file }}')">{{ option.tag }}</li>
+                    {% endfor %}
+                    <li class="list-group-item">
+                        <button id="refresh_button" type="button" class="btn btn-primary" onclick="location.reload();">换一题</button>
+                    </li>
+                </ul>
+            {% else %}
+                <h2>数据不够、我很抱歉</h2>
+                <p>当前数据库中无法凑出一道符合上述设置的题目，请修改设置。</p>
+            {% endif %}
+        
         <hr>
         <p>powered by flask, <a href="https://github.com/GGN-2015">GGN_2015</a></p>
 
@@ -42,7 +111,7 @@
                     <p id="my-message-box-content">...</p>
                 </div>
                 <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
                 </div>
             </div>
             </div>
@@ -79,6 +148,10 @@
                 }
             }
         }
+        function rename_refresh_button() {
+            var refresh_button = document.getElementById("refresh_button");
+            refresh_button.innerHTML = "下一题";
+        }
         function check_answer(myanswer) { // 检查答案是否正确
             if(!answer_checked) {
                 var answer_file = "{{ answer.file }}";
@@ -89,6 +162,7 @@
                     send_message("回答错误<br>正确答案：{{ answer.tag }}");
                     recolor_wrong_answer(myanswer); // 标记错误答案
                 }
+                rename_refresh_button();
             }
             answer_checked = true;
         }
