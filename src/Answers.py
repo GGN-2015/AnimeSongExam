@@ -42,10 +42,15 @@ class Answers:
     def get_all_movie_song(self, year_from, year_to):
         allanime = self.dir_utils.scan_data_dir_with_filename("movie.txt")
         return self.select_song_list_by_year(allanime, year_from, year_to)
+    # 获取所有日文 vocaloid 音乐
     def get_all_jpnv_song(self, year_from, year_to):
+        allanime = self.dir_utils.scan_data_dir_with_filename("jpn_vocaloid.txt")
+        return self.select_song_list_by_year(allanime, year_from, year_to)
         return []
+    # 获取中文 vocaloid 音乐
     def get_all_chnv_song(self, year_from, year_to):
-        return []
+        allanime = self.dir_utils.scan_data_dir_with_filename("chn_vocaloid.txt")
+        return self.select_song_list_by_year(allanime, year_from, year_to)
     # 获取所有歌曲
     def get_all_song(self, year_from, year_to, anime: bool, movie: bool, jpnv: bool, chnv: bool):
         arr = []
@@ -70,6 +75,7 @@ class Answers:
             while ans_list[0] == self.last_answer and retry_cnt < 3: # 尽可能保证相邻两次查询答案不同
                 retry_cnt += 1
                 ans_list = random.sample(all_song, options_cnt)
+            self.last_answer = ans_list[0] # 更新最后出现的答案
             return ans_list
 
 if __name__ == "__main__":

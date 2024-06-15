@@ -1,4 +1,4 @@
-name;
+name;Re:从零开始的异世界生活(Re:ゼロから始める異世界生活)
 quarter;2016-04
 op1.mp3;Redo
 op2.mp3;Paradisus-Paradoxum
