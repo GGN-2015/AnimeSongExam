@@ -1,0 +1,7 @@
+name;化物语(化物語)
+quarter;2009-07
+op1.mp3;staple stable
+op2.mp3;帰り道
+op3.mp3;ambivalent world
+op4.mp3;恋爱循环(恋愛サーキュレーション)
+ed1.mp3;你所不知道的故事(君の知らない物語)
