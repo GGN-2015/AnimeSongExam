@@ -1,0 +1,4 @@
+name;BanG Dream! It's MyGO!!!!!
+quarter;2023-06
+op1.mp3;壱雫空
+int1.mp3;春日影
