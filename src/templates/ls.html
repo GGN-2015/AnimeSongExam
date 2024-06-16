@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>AnimeSongExam</title>
+        <link href="/static/bootstrap-5.3.3-dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    </head>
+    <body>
+        <div class="container-md">
+            <h2>动漫 {{song_list.anime|length}} 首</h2>
+            <ul>
+                {% for song in song_list.anime %}
+                    <li><a href="/audio/{{song.file}}">{{ song.tag|safe }}</a></li>
+                {% endfor %}
+            </ul>
+            <hr>
+            <h2>电影 {{song_list.movie|length}} 首</h2>
+            <ul>
+                {% for song in song_list.movie %}
+                    <li><a href="/audio/{{song.file}}">{{ song.tag|safe }}</a></li>
+                {% endfor %}
+            </ul>
+            <hr>
+            <h2>中 V {{song_list.chnv|length}} 首</h2>
+            <ul>
+                {% for song in song_list.chnv %}
+                    <li><a href="/audio/{{song.file}}">{{ song.tag|safe }}</a></li>
+                {% endfor %}
+            </ul>
+            <hr>
+            <h2>日 V {{song_list.jpnv|length}} 首</h2>
+            <ul>
+                {% for song in song_list.jpnv %}
+                    <li><a href="/audio/{{song.file}}">{{ song.tag|safe }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        <script src="/static/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    </body>
+</html>

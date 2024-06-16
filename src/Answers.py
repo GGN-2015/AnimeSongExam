@@ -1,3 +1,4 @@
+import math
 import os
 import random
 
@@ -61,19 +62,15 @@ class Answers:
     # 获取所有歌曲
     def get_all_song(self, year_from, year_to, anime: bool, movie: bool, jpnv: bool, chnv: bool):
         arr = []
-        
         anime_cnt = len(self.get_all_anime_song(year_from, year_to))
         if anime:
             arr += self.get_all_anime_song(year_from, year_to)
-        
         movie_cnt = len(self.get_all_movie_song(year_from, year_to))
         if movie:
             arr += self.get_all_movie_song(year_from, year_to)
-        
         jpn_cnt = len(self.get_all_jpnv_song(year_from, year_to))
         if jpnv:
             arr += self.get_all_jpnv_song(year_from, year_to)
-
         chn_cnt = len(self.get_all_chnv_song(year_from, year_to))
         if chnv:
             arr += self.get_all_chnv_song(year_from, year_to)
@@ -92,6 +89,14 @@ class Answers:
                 ans_list = random.sample(all_song, options_cnt)
             self.last_answer = ans_list[0] # 更新最后出现的答案
             return ans_list, anime_cnt, movie_cnt, jpn_cnt, chn_cnt
+    # 获取完整歌曲列表
+    def get_song_list(self):
+        return {
+            "anime": self.get_all_anime_song(-math.inf, +math.inf),
+            "movie": self.get_all_movie_song(-math.inf, +math.inf),
+            "jpnv": self.get_all_jpnv_song(-math.inf, +math.inf),
+            "chnv": self.get_all_chnv_song(-math.inf, +math.inf),
+        }
 
 if __name__ == "__main__":
     dir_utils  = DirUtils()

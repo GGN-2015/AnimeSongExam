@@ -19,6 +19,12 @@ def wrap_int(x: str, default_v:int):
         x = default_v
     return x
 
+# 显示歌曲列表
+@app.route('/ls')
+def menu():
+    song_list = answers.get_song_list()
+    return render_template('ls.html', song_list=song_list)
+
 # 首页
 @app.route('/')
 def index():
