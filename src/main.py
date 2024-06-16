@@ -35,7 +35,7 @@ def index():
         movie_checkbox = "1"
         jpn_vocaloid   = "1"
         chn_vocaloid   = "1" # 默认全选
-    options = answers.generate_random_question(question_cnt, year_from, year_to, anime_checkbox=="1", movie_checkbox=="1", jpn_vocaloid=="1", chn_vocaloid=="1")
+    options, anime_cnt, movie_cnt, jpn_cnt, chn_cnt = answers.generate_random_question(question_cnt, year_from, year_to, anime_checkbox=="1", movie_checkbox=="1", jpn_vocaloid=="1", chn_vocaloid=="1")
     if options != []:
         answer = options[0] # 默认第一个选项是答案
     else:
@@ -43,6 +43,10 @@ def index():
     random.shuffle(options) # 重新打乱
     return render_template('index.html', 
         options=options, 
+        anime_cnt=anime_cnt,
+        movie_cnt=movie_cnt,
+        jpn_cnt=jpn_cnt,
+        chn_cnt=chn_cnt,
         answer=answer,
         question_cnt=question_cnt,
         year_from=year_from,

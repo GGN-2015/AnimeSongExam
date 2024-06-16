@@ -61,21 +61,29 @@ class Answers:
     # 获取所有歌曲
     def get_all_song(self, year_from, year_to, anime: bool, movie: bool, jpnv: bool, chnv: bool):
         arr = []
+        
+        anime_cnt = len(self.get_all_anime_song(year_from, year_to))
         if anime:
             arr += self.get_all_anime_song(year_from, year_to)
+        
+        movie_cnt = len(self.get_all_movie_song(year_from, year_to))
         if movie:
             arr += self.get_all_movie_song(year_from, year_to)
+        
+        jpn_cnt = len(self.get_all_jpnv_song(year_from, year_to))
         if jpnv:
             arr += self.get_all_jpnv_song(year_from, year_to)
+
+        chn_cnt = len(self.get_all_chnv_song(year_from, year_to))
         if chnv:
             arr += self.get_all_chnv_song(year_from, year_to)
-        return arr
+        return arr, anime_cnt, movie_cnt, jpn_cnt, chn_cnt
     # 生成一个随机问题
     def generate_random_question(self, options_cnt: int, year_from, year_to, anime: bool, movie: bool, jpnv: bool, chnv: bool):
         assert options_cnt >= 2 # 至少要有两个选项
-        all_song = self.get_all_song(year_from, year_to, anime, movie, jpnv, chnv)
+        all_song, anime_cnt, movie_cnt, jpn_cnt, chn_cnt = self.get_all_song(year_from, year_to, anime, movie, jpnv, chnv)
         if options_cnt > len(all_song):
-            return [] # 返回一个空问题，表示不存在合法的问题
+            return [], anime_cnt, movie_cnt, jpn_cnt, chn_cnt # 返回一个空问题，表示不存在合法的问题
         else:
             ans_list = random.sample(all_song, options_cnt)
             retry_cnt = 0
@@ -83,7 +91,7 @@ class Answers:
                 retry_cnt += 1
                 ans_list = random.sample(all_song, options_cnt)
             self.last_answer = ans_list[0] # 更新最后出现的答案
-            return ans_list
+            return ans_list, anime_cnt, movie_cnt, jpn_cnt, chn_cnt
 
 if __name__ == "__main__":
     dir_utils  = DirUtils()

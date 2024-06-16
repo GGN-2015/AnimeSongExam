@@ -44,25 +44,25 @@
                                         <div class="input-group-text">
                                             <input class="form-check-input mt-0" name="anime_checkbox" id="anime_checkbox" type="checkbox" value="1" aria-label="Checkbox for following text input" {{ "checked" if anime_checkbox == "1" else "" }}>
                                         </div>
-                                        <input type="text" readonly class="form-control" value="动画" aria-label="Text input with checkbox">
+                                        <input type="text" readonly class="form-control" value="动画 {{anime_cnt}} 首" aria-label="Text input with checkbox">
                                     </div>
                                     <div class="input-group mb-3">
                                         <div class="input-group-text">
                                             <input class="form-check-input mt-0" name="movie_checkbox" type="checkbox" value="1" aria-label="Checkbox for following text input" {{ "checked" if movie_checkbox == "1" else "" }}>
                                         </div>
-                                        <input type="text" readonly class="form-control" value="电影" aria-label="Text input with checkbox">
+                                        <input type="text" readonly class="form-control" value="电影 {{movie_cnt}} 首" aria-label="Text input with checkbox">
                                     </div>
                                     <div class="input-group mb-3">
                                         <div class="input-group-text">
                                             <input class="form-check-input mt-0" name="jpn_vocaloid_checkbox" type="checkbox" value="1" aria-label="Checkbox for following text input" {{ "checked" if jpn_vocaloid_checkbox == "1" else "" }}>
                                         </div>
-                                        <input type="text" readonly class="form-control" value="日文 V 家" aria-label="Text input with checkbox">
+                                        <input type="text" readonly class="form-control" value="日文 V 家 {{jpn_cnt}} 首" aria-label="Text input with checkbox">
                                     </div>
                                     <div class="input-group mb-3">
                                         <div class="input-group-text">
                                             <input class="form-check-input mt-0" name="chn_vocaloid_checkbox" type="checkbox" value="1" aria-label="Checkbox for following text input" {{ "checked" if chn_vocaloid_checkbox == "1" else "" }}>
                                         </div>
-                                        <input type="text" readonly class="form-control" value="中文 V 家" aria-label="Text input with checkbox">
+                                        <input type="text" readonly class="form-control" value="中文 V 家 {{chn_cnt}} 首" aria-label="Text input with checkbox">
                                     </div>
                                 </div>
                             </div>
