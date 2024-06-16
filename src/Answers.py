@@ -5,12 +5,18 @@ import random
 from DirUtils  import DirUtils
 from TxtParser import TxtParser
 
-# 在 bootstrap 里打一个 badge
+# 在 bootstrap 里打一个绿色 badge
 def green_badge(s: str) -> str:
     if s.strip() == "":
         return ""
     return "<span class=\'badge text-bg-success\'>%s</span>" % s
     #return s
+
+# 在 bootstrap 里打一个蓝色 badge
+def blue_badge(s: str) -> str:
+    if s.strip() == "":
+        return ""
+    return "<span class=\'badge text-bg-primary\'>%s</span>" % s
 
 # 获取所有可能成为问题答案的项目
 class Answers:
@@ -33,7 +39,11 @@ class Answers:
                 for term in dic:     
                     song_name = dic[term]
                     if term.endswith(".mp3"):
-                        tag  = anime_name + " " + green_badge(term[:-4]) + " " + song_name
+                        if term[:-4] not in ["p1"]:
+                            tag = anime_name + " " + green_badge(term[:-4]) + " " + song_name
+                        else:
+                            author_name = song_name
+                            tag = anime_name + " " + blue_badge(author_name)
                         file = os.path.join(dirnow, term)
                         assert os.path.isfile(file)
                         final_file = os.path.relpath(file, self.dir_utils.get_data_dir()).replace("\\", "/")
